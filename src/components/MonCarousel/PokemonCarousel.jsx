@@ -4,14 +4,14 @@ import PokemonCard from "../MonDraftCard/PokemonCard";
 
 const PokemonCarousel = ({ pokemonData }) => {
     const settings = {
-      dots: false,
-      infinite: true,
       speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3,
+      slidesToScroll: 1,
       variableWidth: true,
       cssEase: "linear",
+      infinite: false
     };
+
+    // todo style for desktop
 
     return (
       <Slider {...settings}>
@@ -20,6 +20,6 @@ const PokemonCarousel = ({ pokemonData }) => {
         ))}
       </Slider>
     );
-  };
+  }
 
 export default PokemonCarousel;

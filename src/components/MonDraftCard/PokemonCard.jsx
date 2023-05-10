@@ -10,7 +10,7 @@ const PokemonCard = (props) => {
       <img className="pokemon-card-image" src={artUrl} alt={name} />
       <div className="pokemon-card-type">
         {type1}
-        {type2 && ` / ${type2}`}
+        {type2 && ` ${type2}`}
       </div>
     </div>
   );

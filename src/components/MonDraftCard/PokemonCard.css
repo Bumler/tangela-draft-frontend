@@ -2,11 +2,14 @@
   border: 2px solid #555;
   border-radius: 5px;
   overflow: hidden;
-  max-width: 100px;
+  max-width: 110px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .pokemon-card-name {
-  font-size: 20px;
+  font-size: 1em;
   font-weight: bold;
   padding: 10px;
   border-bottom: 1px solid #ddd;
@@ -24,4 +27,6 @@
 .pokemon-card-type {
   padding: 10px;
   border-top: 1px solid #ddd;
+  height: 35px;
+  font-size: 15px;
 }
