@@ -1,20 +1,19 @@
 import React from "react";
 import Slider from "react-slick";
 import PokemonCard from "../MonDraftCard/PokemonCard";
+import "./PokemonCarousel.css";
 
 const PokemonCarousel = ({ pokemonData }) => {
     const settings = {
       speed: 500,
-      slidesToScroll: 1,
       variableWidth: true,
-      cssEase: "linear",
-      infinite: false
+      cssEase: "linear"
     };
 
     // todo style for desktop
 
     return (
-      <Slider {...settings}>
+      <Slider className="carousel-container" {...settings}>
         {pokemonData.map((data) => (
           <PokemonCard key={data.name} props={data} />
         ))}

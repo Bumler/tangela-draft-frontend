@@ -1,12 +1,6 @@
 .carousel-container {
     display: flex;
     flex-direction: row;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-  }
-  
-  .carousel-item {
-    scroll-snap-align: start;
-    margin-right: 10px;
+    margin-top: 10px;
   }
   
