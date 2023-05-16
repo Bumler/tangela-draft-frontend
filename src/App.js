@@ -2,6 +2,8 @@ import './App.css';
 
 import PokemonCarousel from './components/MonCarousel/PokemonCarousel';
 import PokemonInfo from './components/MonInfo/PokemonInfo';
+import { PokemonDraftProvider } from './context/PokemonDraftContext';
+import DraftPage from './pages/DraftPage/DraftPage';
 
 const pokemonData = [
   { "name": "Gengar", "type1": "Ghost", "type2": "Poison", "artUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png" },
@@ -44,10 +46,14 @@ const selectedData = JSON.parse('{"name":"tangrowth","tier":"UU","gameData":{"ty
 function App() {
   return (
     <div className="App">
-      <PokemonCarousel pokemonData={pokemonData} />
+      {/* <PokemonCarousel pokemonData={pokemonData} />
       <PokemonCarousel pokemonData={pokemonData2} /> 
       <PokemonCarousel pokemonData={pokemonData3} />  
-      <PokemonInfo pokemonData={selectedData} />
+      <PokemonInfo pokemonData={selectedData} /> */}
+      
+      <PokemonDraftProvider>
+        <DraftPage />
+      </PokemonDraftProvider>
     </div>
   );
 }

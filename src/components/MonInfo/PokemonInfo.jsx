@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./PokemonInfo.css";
+import PokemonDraftContext from '../../context/PokemonDraftContext';
 
-const PokemonInfo = ({ pokemonData }) => {
+const PokemonInfo = () => {
+  const {highlightedMon, availableDraftMons} = useContext(PokemonDraftContext);
+  const pokemonData = availableDraftMons.find(pokemon => pokemon.name === highlightedMon);
+
+  if (!pokemonData){ 
+    return (
+      <div class="centered-text">
+        <h1>Select a Pokemon to see more info</h1>
+      </div>
+    );
+  }
+
   const { name, gameData, displayData } = pokemonData;
   const { type1, type2, stats, abilities } = gameData;
-  const { artUrl, spriteUrl } = displayData;
+  const { spriteUrl } = displayData;
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }} >
