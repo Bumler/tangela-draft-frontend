@@ -2,9 +2,12 @@ import React, { useContext, useEffect } from 'react';
 import PokemonDraftContext from '../../context/PokemonDraftContext';
 import PokemonCarousel from '../../components/MonCarousel/PokemonCarousel';
 import PokemonInfo from '../../components/MonInfo/PokemonInfo';
+import axios from 'axios';
 
 function DraftPage() {
-    const {setAvailableDraftMons, setHighlightedMon} = useContext(PokemonDraftContext);
+    const {setAvailableDraftMons, setHighlightedMon,
+        isDataLoaded, setIsDataLoaded,
+        isDataLoading, setIsDataLoading} = useContext(PokemonDraftContext);
 
     const stagedData = [
         "{\"name\":\"dragonite\",\"tier\":\"OU\",\"gameData\":{\"type1\":\"dragon\",\"type2\":\"flying\",\"abilities\":[{\"name\":\"inner-focus\",\"description\":\"https://pokeapi.co/api/v2/ability/39/\"},{\"name\":\"multiscale\",\"description\":\"https://pokeapi.co/api/v2/ability/136/\"}],\"stats\":{\"hp\":91,\"attack\":134,\"defense\":95,\"specialAttack\":100,\"specialDefense\":100,\"speed\":80}},\"displayData\":{\"artUrl\":\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png\",\"spriteUrl\":\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/diamond-pearl/149.png\",\"backSpriteUrl\":\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/diamond-pearl/back/149.png\"}}",
@@ -28,13 +31,28 @@ function DraftPage() {
       ]
 
     useEffect(() => {
-        const updatedData = [];
-        for (const pokemon of stagedData) {
-            const parsed = JSON.parse(pokemon);
-            updatedData.push(parsed);
+        if (isDataLoading || isDataLoaded) {
+            return;
         }
-        setAvailableDraftMons(updatedData);
-        setHighlightedMon(updatedData[0]);
+
+        setIsDataLoading(true);
+        const endpoint = 'http://localhost:3001/draftPool';
+        axios.get(endpoint).then((response) => {
+            const updatedData = [];
+            const draftPool = response.data;
+
+            for (const pokemon of draftPool) {
+                updatedData.push(pokemon);
+            }
+
+            setAvailableDraftMons(updatedData);
+            setHighlightedMon(updatedData[0]);
+        });
+
+        setIsDataLoaded(true);
+        setIsDataLoading(false);
+
+        // todo this is being called twice, look into later
     }, []); // this is emitting some linter error todo look into later
 
     return (

@@ -8,7 +8,7 @@ const PokemonInfo = () => {
 
   if (!pokemonData){ 
     return (
-      <div class="centered-text">
+      <div className="centered-text">
         <h1>Select a Pokemon to see more info</h1>
       </div>
     );
