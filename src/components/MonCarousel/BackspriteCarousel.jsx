@@ -1,20 +1,20 @@
 import React, { useContext } from 'react';
 import Slider from "react-slick";
-import PokemonCard from "../MonDraftCard/PokemonCard";
 import PokemonDraftContext from '../../context/PokemonDraftContext';
+import BackspriteCard from '../MonDraftCard/BackspriteCard';
 import "./PokemonCarousel.css";
 
-const PokemonCarousel = ({ tier }) => {
-    const {availableDraftMons} = useContext(PokemonDraftContext);
+const BackspriteCarousel = () => {
+    const {availableDraftMons, selectedTrainerId} = useContext(PokemonDraftContext);
     
     if (!availableDraftMons) return (<div>Loading...</div>);
 
     // Filter the pokemonData by the given tier and map to an object with name and artUrl
     const pokemonList = availableDraftMons
-      .filter(pokemon => tier.includes(pokemon.tier) && !pokemon.isDrafted)
+      .filter(pokemon => pokemon.isDrafted && pokemon.trainerId === selectedTrainerId)
       .map(pokemon => ({
         name: pokemon.name,
-        artUrl: pokemon.displayData.artUrl
+        artUrl: pokemon.displayData.backSpriteUrl
       }));
 
     const settings = {
@@ -29,10 +29,10 @@ const PokemonCarousel = ({ tier }) => {
     return (
       <Slider className="carousel-container" {...settings}>
         {pokemonList.map((data) => (
-          <PokemonCard key={data.name} props={data} />
+          <BackspriteCard key={data.name} name={data.name} artUrl={data.artUrl} />
         ))}
       </Slider>
     );
   }
 
-export default PokemonCarousel;
+export default BackspriteCarousel;

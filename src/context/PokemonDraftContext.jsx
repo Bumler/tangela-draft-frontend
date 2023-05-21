@@ -7,12 +7,14 @@ export function PokemonDraftProvider({ children }) {
     const [highlightedMon, setHighlightedMon] = React.useState("");
     const [isDataLoading, setIsDataLoading] = React.useState(false);
     const [isDataLoaded, setIsDataLoaded] = React.useState(false);
+    const [selectedTrainerId, setSelectedTrainerId] = React.useState("");
 
     return (
         <PokemonDraftContext.Provider value={{ availableDraftMons, setAvailableDraftMons, 
         highlightedMon, setHighlightedMon,
         isDataLoading, setIsDataLoading,
-        isDataLoaded, setIsDataLoaded }}>
+        isDataLoaded, setIsDataLoaded,
+        selectedTrainerId, setSelectedTrainerId }}>
             {children}
         </PokemonDraftContext.Provider>
     )

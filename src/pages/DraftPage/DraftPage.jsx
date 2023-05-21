@@ -2,7 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import PokemonDraftContext from '../../context/PokemonDraftContext';
 import PokemonCarousel from '../../components/MonCarousel/PokemonCarousel';
 import PokemonInfo from '../../components/MonInfo/PokemonInfo';
+import TrainerBar from '../../components/Trainer/TrainerBar';
+import BackspriteCarousel from '../../components/MonCarousel/BackspriteCarousel';
 import axios from 'axios';
+import DraftButton from '../../components/DraftButton/DraftButton';
 
 function DraftPage() {
     const {setAvailableDraftMons, setHighlightedMon,
@@ -47,6 +50,7 @@ function DraftPage() {
 
             setAvailableDraftMons(updatedData);
             setHighlightedMon(updatedData[0]);
+            console.log(updatedData);
         });
 
         setIsDataLoaded(true);
@@ -57,10 +61,13 @@ function DraftPage() {
 
     return (
         <div>
-            <PokemonCarousel tier="OU" />
-            <PokemonCarousel tier="UU" />
-            <PokemonCarousel tier="NU" /> 
+            <PokemonCarousel tier={["OU", "(OU)"]} />
+            <PokemonCarousel tier={["UU", "UUBL"]} />
+            <PokemonCarousel tier={["NU", "NUBL"]} /> 
+            <TrainerBar />
             <PokemonInfo />
+            <BackspriteCarousel />
+            <DraftButton />
         </div>
     );
 }

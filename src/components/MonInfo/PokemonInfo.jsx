@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import "./PokemonInfo.css";
+import "../../App.css";
 import PokemonDraftContext from '../../context/PokemonDraftContext';
 
 const PokemonInfo = () => {
@@ -14,6 +15,9 @@ const PokemonInfo = () => {
     );
   }
 
+  // it will be still and translucent if it is drafted else bouncing
+  const spriteClass = pokemonData.isDrafted ? "translucent" : "pokemon-sprite"
+
   const { name, gameData, displayData } = pokemonData;
   const { type1, type2, stats, abilities } = gameData;
   const { spriteUrl } = displayData;
@@ -21,17 +25,22 @@ const PokemonInfo = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }} >
       <div style={{ display: "flex" }}>
-        <img src={spriteUrl} alt={name} style={{ width: "33%" }} className="pokemon-sprite" />
-        <div style={{ width: "67%", display: "flex", flexDirection: "column" }}>
-          <h2>{name}</h2>
+        <div style={{ width: "10%" }} />
+        <img src={spriteUrl} alt={name} style={{ width: "25%" }} className={spriteClass} />
+        <div style={{ width: "5%" }} />
+        <div style={{ width: "50%", display: "flex", flexDirection: "column" }}>
+          <h2 style={{ paddingTop: "10px" }}>{name}</h2>
+          {pokemonData.isDrafted ? (<div>Selected by {pokemonData.trainerId}</div>) : null } 
           <div>
             Type: {type1}
             {type2 && `, ${type2}`}
           </div>
         </div>
+        <div style={{ width: "10%" }} />
       </div>
       <div style={{ display: "flex" }}>
-        <div style={{ width: "33%", display: "flex", justifyContent: "space-between" }}>
+        <div style={{ width: "5%" }} />
+        <div style={{ width: "40%", display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>Hp: {stats.hp}</div>
             <div>Atk: {stats.attack}</div>
@@ -43,7 +52,7 @@ const PokemonInfo = () => {
             <div>Spd: {stats.speed}</div>
           </div>
         </div>
-        <div style={{ width: "67%" }}>
+        <div style={{ width: "40%" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
                 {abilities.map((ability) => (
                 <div key={ability.name}>{ability.name}</div>
@@ -51,6 +60,7 @@ const PokemonInfo = () => {
             </div>
             </div>
       </div>
+      <div style={{ width: "10%" }} />
     </div>
   );
 };
