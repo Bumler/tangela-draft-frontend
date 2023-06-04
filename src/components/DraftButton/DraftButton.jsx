@@ -4,6 +4,7 @@ import PokemonDraftContext from '../../context/PokemonDraftContext';
 import Modal from 'react-bootstrap/Modal';
 import Trainer from '../Trainer/Trainer';
 import './DraftButton.css';
+import axios from 'axios';
 
 const DraftButton = () => {
     const [show, setShow] = useState(false);
@@ -32,7 +33,19 @@ const DraftButton = () => {
 
         setAvailableDraftMons(updatedDraftMons);
 
-        // todo make a backend call here.
+        const endpoint = 'http://localhost:3001/draftMon';
+        
+        const payload = {
+            trainerId: selectedTrainerId,
+            pokemonName: pokemonData.name
+        }
+        
+        axios.post(endpoint, payload).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        });
+
         handleClose();
     }
 

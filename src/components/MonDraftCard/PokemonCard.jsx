@@ -10,16 +10,11 @@ const PokemonCard = (props) => {
     setHighlightedMon(name);
   };
 
-  //console.log(props);
   return (
     // we might have room for type on non-mobile
     <div className="pokemon-card" onClick={handleClick}>
       <div className="pokemon-card-name">{name}</div>
       <img className="pokemon-card-image" src={artUrl} alt={name} />
-      {/* <div className="pokemon-card-type">
-        {type1}
-        {type2 && ` ${type2}`}
-      </div> */} 
     </div>
   );
 };
